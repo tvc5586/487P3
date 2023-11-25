@@ -45,12 +45,6 @@
 					
 					if ($conn->query($sql) === TRUE && $conn->query($sql1) === TRUE) {
 					  echo "New rent established";
-					} 
-					elseif($conn->query($sql) === FALSE && $conn->query($sql1) === TRUE) {
-					  echo "One tenant can only rent one apartment at a time!";
-					}
-					elseif($conn->query($sql) === TRUE && $conn->query($sql1) === FALSE) {
-					  echo "One tenant can only have one account!";
 					} else {
 					  echo "Error adding tenant: " . $conn->error;
 					}

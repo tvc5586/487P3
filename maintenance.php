@@ -37,10 +37,10 @@
 					$sql = "SELECT ID, user_id, apartment, area, description, time, image_link, status FROM request ORDER BY area";
 				}
 				elseif(isset($_POST['sortDate'])) {
-					$start_date=date_format($_POST['start_date'],"Y/m/d H:i:s");
-					$end_date=date_format($_POST['end_date'],"Y/m/d H:i:s");
+					$start_date=$_POST['start_date'];
+					$end_date=$_POST['end_date'];
 					
-					$sql = "SELECT ID, user_id, apartment, area, description, time, image_link, status FROM request WHERE time >= $start_date AND time <= $end_date";
+					$sql = "SELECT ID, user_id, apartment, area, description, time, image_link, status FROM request WHERE time >= '$start_date' AND time <= '$end_date'";
 				}
 				elseif(isset($_POST['sortStatus'])) {
 					$sql = "SELECT ID, user_id, apartment, area, description, time, image_link, status FROM request ORDER BY status";
@@ -106,13 +106,10 @@
 					$sql = "UPDATE request SET status='Complete' WHERE id='$id'";
 
 					if ($conn->query($sql) === TRUE) {
-					  echo "Request completed";
+					  echo "Request $id completed";
 					} else {
 					  echo "Error updating request: " . $conn->error;
 					}
-					
-					header("Location: maintenance.php");
-					exit();
 				}
 			}
 			$conn->close();
